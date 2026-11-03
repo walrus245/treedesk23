@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Storm 0S</title></head>
+<body style="margin:0;background:#0b0b19;color:#eee;font-family:Arial,sans-serif">
+<p id="status" style="padding:24px">Loading Storm 0S…</p>
+<script>
+(async()=>{
+ const sources=[
+  'https://cdn.jsdelivr.net/gh/masterstorm257-maker/STORM0S@df8451e3f7c8124909957d216cb71209e4bf5f0b/STORM0S.html',
+  'https://fastly.jsdelivr.net/gh/masterstorm257-maker/STORM0S@df8451e3f7c8124909957d216cb71209e4bf5f0b/STORM0S.html',
+  'https://gcore.jsdelivr.net/gh/masterstorm257-maker/STORM0S@df8451e3f7c8124909957d216cb71209e4bf5f0b/STORM0S.html'
+ ];
+ for(const url of sources){
+  try{
+   const response=await fetch(url,{signal:AbortSignal.timeout(20000)});
+   if(!response.ok)continue;
+   const html=await response.text();
+   if(!/<html[\s>]/i.test(html)||!html.includes('homeView'))continue;
+   document.open();document.write(html);document.close();return;
+  }catch(error){}
+ }
+ document.getElementById('status').textContent='Storm 0S could not load. Check your connection and reload to try again.';
+})();
+</script></body></html>
